@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   file_picker: ^10.3.8
   package_info_plus: ^9.0.0
   path: ^1.9.1
@@ -29,3 +31,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: "PuHui"
+      fonts:
+        - asset: font/AlibabaPuHuiTi-3-Regular.ttf
