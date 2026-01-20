@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:window_manager/window_manager.dart';
 
 class MainView extends StatefulWidget {
@@ -73,6 +74,105 @@ class _MainViewState extends State<MainView> with WindowListener {
             ],
           ),
         ),
+        Expanded(
+          child: Center(
+            child: Text("google!"),
+          )
+        ),
+        if(Platform.isMacOS) PlatformMenuBar(
+          menus: [
+            PlatformMenu(
+              label: "Resizer",
+              menus: [
+                PlatformMenuItemGroup(
+                  members: [
+                    PlatformMenuItem(
+                      label: "关于 Resizer",
+                      onSelected: (){
+                        // TODO 显示关于
+                      }
+                    )
+                  ]
+                ),
+                PlatformMenuItemGroup(
+                  members: [
+                    PlatformMenuItem(
+                      label: "设置",
+                      shortcut: const SingleActivator(
+                        LogicalKeyboardKey.comma,
+                        meta: true,
+                      ),
+                      onSelected: (){
+                        // TODO 前往设置
+                      }
+                    ),
+                  ]
+                ),
+                const PlatformMenuItemGroup(
+                  members: [
+                    PlatformProvidedMenuItem(
+                      enabled: true,
+                      type: PlatformProvidedMenuItemType.hide,
+                    ),
+                    PlatformProvidedMenuItem(
+                      enabled: true,
+                      type: PlatformProvidedMenuItemType.quit,
+                    ),
+                  ]
+                ),
+              ]
+            ),
+            PlatformMenu(
+              label: "编辑",
+              menus: [
+                PlatformMenuItem(
+                  label: "拷贝",
+                  onSelected: (){
+                    final focusedContext = FocusManager.instance.primaryFocus?.context;
+                    if (focusedContext != null) {
+                      Actions.invoke(focusedContext, CopySelectionTextIntent.copy);
+                    }
+                  }
+                ),
+                PlatformMenuItem(
+                  label: "粘贴",
+                  onSelected: (){
+                    final focusedContext = FocusManager.instance.primaryFocus?.context;
+                    if (focusedContext != null) {
+                      Actions.invoke(focusedContext, const PasteTextIntent(SelectionChangedCause.keyboard));
+                    }
+                  },
+                ),
+                PlatformMenuItem(
+                  label: "全选",
+                  onSelected: (){
+                    final focusedContext = FocusManager.instance.primaryFocus?.context;
+                    if (focusedContext != null) {
+                      Actions.invoke(focusedContext, const SelectAllTextIntent(SelectionChangedCause.keyboard));
+                    }
+                  }
+                )
+              ]
+            ),
+            const PlatformMenu(
+              label: "窗口", 
+              menus: [
+                PlatformMenuItemGroup(
+                  members: [
+                    PlatformProvidedMenuItem(
+                      enabled: true,
+                      type: PlatformProvidedMenuItemType.minimizeWindow,
+                    ),
+                    PlatformProvidedMenuItem(
+                      enabled: true,
+                      type: PlatformProvidedMenuItemType.toggleFullScreen,
+                    )
+                  ]
+                )
+              ]
+            )
+          ]
+        )
       ],
     );
   }
