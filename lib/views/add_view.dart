@@ -23,7 +23,9 @@ class _AddViewState extends State<AddView> {
       onDragDone: (detail){
         final filePath=detail.files.first.path;
         final ext = p.extension(filePath).toLowerCase();
-        if(!['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp'].contains(ext)){
+        if(['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp'].contains(ext)){
+          controller.path.value = filePath;          
+        }else{
           showOkDialog(context, "addImageFailed".tr, "formatError".tr);
         }
       },
