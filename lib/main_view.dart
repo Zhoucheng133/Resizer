@@ -2,6 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get_instance/get_instance.dart';
+import 'package:get/state_manager.dart';
+import 'package:resizer/utils/controller.dart';
+import 'package:resizer/views/add_view.dart';
+import 'package:resizer/views/config.dart';
 import 'package:window_manager/window_manager.dart';
 
 class MainView extends StatefulWidget {
@@ -43,6 +48,8 @@ class _MainViewState extends State<MainView> with WindowListener {
     });
   }
 
+  final Controller controller = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -75,8 +82,8 @@ class _MainViewState extends State<MainView> with WindowListener {
           ),
         ),
         Expanded(
-          child: Center(
-            child: Text("google!"),
+          child: Obx(()=>
+            controller.path.value.isEmpty ? AddView() : Config()
           )
         ),
         if(Platform.isMacOS) PlatformMenuBar(

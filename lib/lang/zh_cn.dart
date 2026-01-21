@@ -1,3 +1,7 @@
 const Map<String, String> zhCN = {
-  "add": "添加图片，你也可以拖拽图片到这里",
+  'add': "添加图片，你也可以拖拽图片到这里",
+  'ok': "好的",
+  'cancel': "取消",
+  'addImageFailed': "添加图片失败",
+  'formatError': "格式错误",
 };
