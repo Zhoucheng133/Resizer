@@ -4,8 +4,9 @@ class ConfigItem extends StatefulWidget {
 
   final String label;
   final Widget child;
+  final int labelWidth;
 
-  const ConfigItem({super.key, required this.label, required this.child});
+  const ConfigItem({super.key, required this.label, required this.child, this.labelWidth = 100});
 
   @override
   State<ConfigItem> createState() => _ConfigItemState();
@@ -15,12 +16,12 @@ class _ConfigItemState extends State<ConfigItem> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 5),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            width: 80,
+            width: widget.labelWidth.toDouble(),
             child: Text(
               widget.label,
             ),

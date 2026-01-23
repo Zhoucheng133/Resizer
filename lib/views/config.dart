@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:path/path.dart' as p;
-import 'package:resizer/components/config_item.dart';
+import 'package:resizer/components/config_multiple.dart';
+import 'package:resizer/components/config_single.dart';
 import 'package:resizer/utils/controller.dart';
 
 class Config extends StatefulWidget {
@@ -50,18 +50,6 @@ class _ConfigState extends State<Config> {
                 child: Column(
                   crossAxisAlignment: .start,
                   children: [
-                    Text(
-                      p.basename(controller.path.value),
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)
-                    ),
-                    ConfigItem(
-                      label: "path".tr, 
-                      child: Text(
-                        controller.path.value,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      )
-                    ),
                     SizedBox(
                       width: double.infinity,
                       child: SegmentedButton<Mode>(
@@ -74,7 +62,11 @@ class _ConfigState extends State<Config> {
                           controller.mode.value = newSelection.first;
                         },
                       ),
-                    )
+                    ),
+                    const SizedBox(height: 10),
+                    controller.mode.value==Mode.single ?
+                    ConfigSingle(key: Key("single"),) :
+                    ConfigMultiple(key: Key("multiple"),)
                   ],
                 ),
               ),

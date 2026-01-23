@@ -9,4 +9,6 @@ const Map<String, String> zhCN = {
   'single': "单图",
   'multiple': "多图",
   'json': "JSON",
+  'outputSize': "输出尺寸",
+  'lockRatio': "锁定比例",
 };
