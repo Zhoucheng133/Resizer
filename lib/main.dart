@@ -23,6 +23,7 @@ Future<void> main() async {
     skipTaskbar: false,
     titleBarStyle: TitleBarStyle.hidden,
     title: 'Resizer',
+    minimumSize: Size(800, 600),
   );
   windowManager.waitUntilReadyToShow(windowOptions, () async {
     await windowManager.show();
