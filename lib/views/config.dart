@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:path/path.dart' as p;
+import 'package:resizer/components/config_item.dart';
 import 'package:resizer/utils/controller.dart';
 
 class Config extends StatefulWidget {
@@ -42,10 +44,40 @@ class _ConfigState extends State<Config> {
               color: Theme.of(context).brightness==Brightness.dark ? Colors.grey[850] : Colors.white,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Column(
-              children: [
-                
-              ],
+            child: Obx(
+              ()=> Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: .start,
+                  children: [
+                    Text(
+                      p.basename(controller.path.value),
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)
+                    ),
+                    ConfigItem(
+                      label: "path".tr, 
+                      child: Text(
+                        controller.path.value,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      )
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: SegmentedButton<Mode>(
+                        segments: Mode.values.map((e) => ButtonSegment(
+                          value: e,
+                          label: Text(e.name.tr),
+                        )).toList(),
+                        selected: { controller.mode.value },
+                        onSelectionChanged: (Set<Mode> newSelection) {
+                          controller.mode.value = newSelection.first;
+                        },
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ),
           ),
         )
