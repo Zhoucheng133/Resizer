@@ -37,9 +37,13 @@ class Handler extends GetxController {
     return rlt;
   }
 
-  Future<Size> getSize(String path) async {
-    final String rlt=await compute(getSizeHandler, [path.toNativeUtf8()]);
-    final List<String> size=rlt.split('x');
-    return Size(double.parse(size[0]), double.parse(size[1]));
+  Future<Size?> getSize(String path) async {
+    try {
+      final String rlt=await compute(getSizeHandler, [path.toNativeUtf8()]);
+      final List<String> size=rlt.split('x');
+      return Size(double.parse(size[0]), double.parse(size[1]));
+    } catch (_) {
+      return null;
+    }
   }
 }

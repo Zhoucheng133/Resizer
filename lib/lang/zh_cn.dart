@@ -4,4 +4,5 @@ const Map<String, String> zhCN = {
   'cancel': "取消",
   'addImageFailed': "添加图片失败",
   'formatError': "格式错误",
+  'getSizeError': "获取图片尺寸失败",
 };

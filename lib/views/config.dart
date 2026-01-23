@@ -23,14 +23,30 @@ class _ConfigState extends State<Config> {
           child: Padding(
             padding: const EdgeInsets.all(30.0),
             child: Obx(()=>
-              Image.file(File(controller.path.value))
+              Column(
+                mainAxisSize: .min,
+                children: [
+                  Image.file(File(controller.path.value)),
+                  const SizedBox(height: 10),
+                  Text("${controller.size.value.width.toInt()} (W) x ${controller.size.value.height.toInt()} (H)")
+                ],
+              )
             ),
           )
         ),
-        Container(
-          width: 400,
-          decoration: BoxDecoration(
-            color: Colors.red
+        Padding(
+          padding: const EdgeInsets.only(right: 10, bottom: 10, top: 10),
+          child: Container(
+            width: 400,
+            decoration: BoxDecoration(
+              color: Theme.of(context).brightness==Brightness.dark ? Colors.grey[850] : Colors.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Column(
+              children: [
+                
+              ],
+            ),
           ),
         )
       ]
