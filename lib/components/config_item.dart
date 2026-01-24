@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 class ConfigItem extends StatefulWidget {
 
   final String label;
+  final Widget? labelWidget;
   final Widget child;
   final int labelWidth;
 
-  const ConfigItem({super.key, required this.label, required this.child, this.labelWidth = 100});
+  const ConfigItem({super.key, required this.label, required this.child, this.labelWidth = 100, this.labelWidget});
 
   @override
   State<ConfigItem> createState() => _ConfigItemState();
@@ -22,7 +23,7 @@ class _ConfigItemState extends State<ConfigItem> {
         children: [
           SizedBox(
             width: widget.labelWidth.toDouble(),
-            child: Text(
+            child: widget.labelWidget ?? Text(
               widget.label,
             ),
           ),

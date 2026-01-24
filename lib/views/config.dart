@@ -61,7 +61,7 @@ class _ConfigState extends State<Config> {
             ),
             child: Obx(
               ()=> Padding(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(15),
                 child: Column(
                   crossAxisAlignment: .start,
                   children: [
@@ -79,9 +79,11 @@ class _ConfigState extends State<Config> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    controller.mode.value==Mode.single ?
-                    ConfigSingle(key: Key("single"),) :
-                    ConfigMultiple(key: Key("multiple"),)
+                    Expanded(
+                      child: controller.mode.value==Mode.single ?
+                      ConfigSingle(key: Key("single"),) :
+                      ConfigMultiple(key: Key("multiple"),),
+                    )
                   ],
                 ),
               ),

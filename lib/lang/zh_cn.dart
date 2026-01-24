@@ -13,4 +13,13 @@ const Map<String, String> zhCN = {
   'lockRatio': "锁定比例",
   'format': "格式",
   'outputName': "输出名称",
+  'outputPath': "输出目录",
+  'select': "选择",
+  'generate': "生成",
+  'error': "错误",
+  'invalidOutputPath': "无效的输出目录",
+  'invalidOutputName': "无效的输出名称",
+  'invalidOutputSize': "无效的输出尺寸",
+  'success': "成功",
+  'generateSuccess': "生成成功",
 };

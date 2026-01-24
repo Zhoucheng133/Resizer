@@ -1,11 +1,15 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:path/path.dart' as p;
 import 'package:resizer/components/config_item.dart';
+import 'package:resizer/components/dialogs.dart';
 import 'package:resizer/utils/controller.dart';
+import 'package:resizer/utils/handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ConfigSingle extends StatefulWidget {
   const ConfigSingle({super.key});
@@ -17,6 +21,7 @@ class ConfigSingle extends StatefulWidget {
 class _ConfigSingleState extends State<ConfigSingle> {
 
   final Controller controller=Get.find();
+  final Handler handler=Get.find();
 
   final TextEditingController sizeWController = TextEditingController();
   final TextEditingController sizeHController = TextEditingController();
@@ -30,6 +35,21 @@ class _ConfigSingleState extends State<ConfigSingle> {
 
   bool invalidInput(String input){
     return !input.isNumericOnly || input.isEmpty || input.startsWith("0");
+  }
+
+  Future<bool> checkTask(BuildContext context) async {
+    if(outputNameController.text.isEmpty || outputNameController.text.contains(" ")){
+      await showOkDialog(context, "error".tr, "invalidOutputName".tr);
+      return false;
+    }else if(controller.outputPath.value.isEmpty){
+      await showOkDialog(context, "error".tr, "invalidOutputPath".tr);
+      return false;
+    }
+    if(invalidInput(sizeWController.text) || invalidInput(sizeHController.text)){
+      await showOkDialog(context, "error".tr, "invalidOutputSize".tr);
+      return false;
+    }
+    return true;
   }
 
   @override
@@ -212,6 +232,80 @@ class _ConfigSingleState extends State<ConfigSingle> {
             autocorrect: false,
             enableSuggestions: false,
           )
+        ),
+        Expanded(child: Container()),
+        ConfigItem(
+          label: "outputPath".tr, 
+          labelWidget: Align(
+            alignment: .centerLeft,
+            child: Icon(Icons.folder_rounded)
+          ),
+          labelWidth: 35,
+          child: Row(
+            children: [
+              Expanded(
+                child: Obx(
+                  ()=> TextField(
+                    controller: TextEditingController(text: controller.outputPath.value),
+                    readOnly: true,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      isCollapsed: true,
+                      contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                    ),
+                    autocorrect: false,
+                    enableSuggestions: false,
+                  ),
+                )
+              ),
+              const SizedBox(width: 10,),
+              ElevatedButton(
+                onPressed: () async {
+                  String? path = await FilePicker.platform.getDirectoryPath();
+                  if(path == null) return;
+                  final SharedPreferences prefs = await SharedPreferences.getInstance();
+                  prefs.setString("outputPath", path);
+                  controller.outputPath.value = path;
+                },
+                child: Text("select".tr),
+              ),
+            ],
+          )
+        ),
+        Padding(
+          padding: .symmetric(vertical: 5),
+          child: Obx(
+            ()=> FilledButton(
+              onPressed: controller.running.value ? null : () async {
+                if(await checkTask(context)){
+                  controller.running.value = true;
+                  final rlt=await handler.convert(controller.path.value, int.parse(sizeWController.text), int.parse(sizeHController.text), controller.outputPath.value, "${outputNameController.text}.${format.name}");
+                  controller.running.value = false;
+                  if(!rlt.contains("OK") && context.mounted){
+                    await showOkDialog(context, "error".tr, rlt);
+                  }else if(context.mounted){
+                    await showOkDialog(context, "success".tr, "generateSuccess".tr);
+                  }
+                }
+              }, 
+              child: controller.running.value ? Center(
+                child: SizedBox(
+                  width: 15,
+                  height: 15,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 3,
+                  )
+                ),
+              ) : Row(
+                mainAxisAlignment: .center,
+                children: [
+                  Icon(Icons.play_arrow_rounded),
+                  const SizedBox(width: 10,),
+                  Text("generate".tr),
+                ],
+              )
+            ),
+          ),
         )
       ],
     );
