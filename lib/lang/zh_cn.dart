@@ -11,4 +11,6 @@ const Map<String, String> zhCN = {
   'json': "JSON",
   'outputSize': "输出尺寸",
   'lockRatio': "锁定比例",
+  'format': "格式",
+  'outputName': "输出名称",
 };

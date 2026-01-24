@@ -8,6 +8,14 @@ enum Mode{
   json
 }
 
+enum Format{
+  png,
+  jpg,
+  webp,
+  gif,
+  svg,
+}
+
 class Controller extends GetxController {
   RxString path = "".obs;
   Rx<Size> size = Size(0, 0).obs;

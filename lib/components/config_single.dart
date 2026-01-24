@@ -1,7 +1,9 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:path/path.dart' as p;
 import 'package:resizer/components/config_item.dart';
 import 'package:resizer/utils/controller.dart';
 
@@ -21,6 +23,9 @@ class _ConfigSingleState extends State<ConfigSingle> {
 
   bool lockRatio = true;
 
+  Format format=Format.png;
+  TextEditingController outputNameController=TextEditingController();
+
   double ratio = 1;
 
   bool invalidInput(String input){
@@ -32,9 +37,18 @@ class _ConfigSingleState extends State<ConfigSingle> {
     super.initState();
     sizeWController.text = controller.size.value.width.toInt().toString();
     sizeHController.text = controller.size.value.height.toInt().toString();
+    outputNameController.text = p.basenameWithoutExtension(controller.path.value);
     setState(() {
       ratio = controller.size.value.width / controller.size.value.height;
     });
+  }
+
+  @override
+  void dispose(){
+    sizeWController.dispose();
+    sizeHController.dispose();
+    outputNameController.dispose();
+    super.dispose();
   }
 
   @override
@@ -155,8 +169,50 @@ class _ConfigSingleState extends State<ConfigSingle> {
                 ),
               ),
             ],
+          ),
+        ),
+        ConfigItem(
+          label: "format".tr, 
+          child: Align(
+            alignment: .centerLeft,
+            child: SizedBox(
+              width: 100,
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton2(
+                  menuItemStyleData: MenuItemStyleData(
+                    height: 35
+                  ),
+                  items: Format.values.map((e) {
+                    return DropdownMenuItem(
+                      value: e,
+                      child: Text(e.name),
+                    );
+                  }).toList(),
+                  value: format,
+                  onChanged: (Format? val){
+                    if(val == null) return;
+                    setState(() {
+                      format = val;
+                    });
+                  }
+                )
+              ),
+            ),
           )
         ),
+        ConfigItem(
+          label: "outputName".tr, 
+          child: TextField(
+            controller: outputNameController,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              isCollapsed: true,
+              contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+            ),
+            autocorrect: false,
+            enableSuggestions: false,
+          )
+        )
       ],
     );
   }
