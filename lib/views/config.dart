@@ -24,15 +24,30 @@ class _ConfigState extends State<Config> {
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(30.0),
-            child: Obx(()=>
-              Column(
-                mainAxisSize: .min,
-                children: [
-                  Image.file(File(controller.path.value)),
-                  const SizedBox(height: 10),
-                  Text("${controller.size.value.width.toInt()} (W) x ${controller.size.value.height.toInt()} (H)")
-                ],
-              )
+            child: Stack(
+              children: [
+                Obx(()=>
+                  Column(
+                    mainAxisAlignment: .center,
+                    children: [
+                      Image.file(File(controller.path.value)),
+                      const SizedBox(height: 10),
+                      Text("${controller.size.value.width.toInt()} (W) x ${controller.size.value.height.toInt()} (H)")
+                    ],
+                  )
+                ),
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: IconButton(
+                    onPressed: (){
+                      controller.path.value="";
+                      controller.size.value=Size(0,0);
+                    }, 
+                    icon: Icon(Icons.close_rounded)
+                  )
+                )
+              ],
             ),
           )
         ),
