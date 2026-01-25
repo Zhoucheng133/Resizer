@@ -21,7 +21,7 @@ class Controller extends GetxController {
 
   late SharedPreferences prefs;
 
-  void init() async {
+  Future<void> init() async {
     prefs = await SharedPreferences.getInstance();
     outputPath.value = prefs.getString("outputPath") ?? "";
   }

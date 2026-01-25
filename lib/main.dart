@@ -13,7 +13,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   Get.put(Handler());
-  Get.put(Controller());
+  final controller=Get.put(Controller());
+  await controller.init();
 
   await windowManager.ensureInitialized();
   WindowOptions windowOptions = WindowOptions(
