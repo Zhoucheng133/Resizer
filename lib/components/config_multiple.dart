@@ -75,16 +75,11 @@ class _ConfigMultipleState extends State<ConfigMultiple> {
                 ),
                 FilledButton(
                   style: FilledButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(10),
-                        bottomRight: Radius.circular(10)
-                      )
-                    ),
+                    shape: RoundedRectangleBorder(),
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   ),
                   onPressed: (){
-                    // TODO 添加输出
+                    // TODO 已保存
                   }, 
                   child: Row(
                     mainAxisSize: .min,
@@ -94,6 +89,21 @@ class _ConfigMultipleState extends State<ConfigMultiple> {
                       Text('saved'.tr)
                     ],
                   )
+                ),
+                FilledButton(
+                  style: FilledButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(10),
+                        bottomRight: Radius.circular(10)
+                      )
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  ),
+                  onPressed: (){
+                    controller.multipleConfigItems.clear();
+                  }, 
+                  child: Icon(Icons.delete_rounded)
                 ),
               ],
             ),
