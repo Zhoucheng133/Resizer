@@ -60,7 +60,7 @@ class _AddViewState extends State<AddView> {
               icon: const Icon(Icons.add_rounded)
             ),
             const SizedBox(height: 5,),
-            Text("add".tr),
+            Text("add_view_tip".tr),
           ],
         ),
       ),
