@@ -1,5 +1,5 @@
 const Map<String, String> zhCN = {
-  'add': "添加图片，你也可以拖拽图片到这里",
+  'add_view_tip': "添加图片，你也可以拖拽图片到这里",
   'ok': "好的",
   'cancel': "取消",
   'addImageFailed': "添加图片失败",
@@ -25,4 +25,10 @@ const Map<String, String> zhCN = {
   'addOutput': "添加输出",
   'fromJson': "从JSON",
   'saved': "已保存",
+  'add': "添加",
+  'saveConfig': "保存配置",
+  'name': "名称",
+  'noExtNeeded': "输出名称不需要后缀名",
+  'extNeeded': "需要后缀名",
+  'sizeTip': "长或宽为0表示按照比例缩放"
 };

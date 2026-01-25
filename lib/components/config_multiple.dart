@@ -1,6 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:resizer/components/add_output_dialog.dart';
 import 'package:resizer/components/config_item.dart';
 import 'package:resizer/utils/controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -44,9 +45,7 @@ class _ConfigMultipleState extends State<ConfigMultiple> {
                     ),
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   ),
-                  onPressed: (){
-                    // TODO 添加输出
-                  }, 
+                  onPressed: ()=>showAddOutputDialog(context), 
                   child: Row(
                     mainAxisSize: .min,
                     children: [
@@ -100,7 +99,14 @@ class _ConfigMultipleState extends State<ConfigMultiple> {
           ),
         ),
         Expanded(
-          child: Placeholder()
+          child: Obx(()=>
+            ListView.builder(
+              itemCount: controller.multipleConfigItems.length,
+              itemBuilder: (context, index)=>Text(
+                controller.multipleConfigItems[index].path,
+              )
+            )
+          )
         ),
         ConfigItem(
           label: "outputPath".tr, 
@@ -149,6 +155,10 @@ class _ConfigMultipleState extends State<ConfigMultiple> {
             ()=> FilledButton(
               onPressed: controller.running.value ? null : () async {
                 // TODO 运行
+                // print(controller.multipleConfigItems);
+                for (var element in controller.multipleConfigItems) {
+                  print(element.toJson());
+                }
               }, 
               child: controller.running.value ? Center(
                 child: SizedBox(

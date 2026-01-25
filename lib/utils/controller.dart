@@ -16,6 +16,35 @@ enum Format{
   svg,
 }
 
+enum Status{
+  waiting,
+  running,
+  done,
+  error,
+}
+
+class MultipleConfigItem{
+  String name;
+  String path;
+  int width;
+  int height;
+  Status status=Status.waiting;
+  MultipleConfigItem(this.name, this.path, this.width, this.height);
+
+  MultipleConfigItem.fromJson(Map<String, dynamic> json)
+      : name = json['name'],
+        path = json['path'],
+        width = json['width'],
+        height = json['height'];
+
+  Map toJson() => {
+    'name': name,
+    'path': path,
+    'width': width,
+    'height': height,
+  };
+}
+
 class Controller extends GetxController {
 
   late SharedPreferences prefs;
@@ -31,4 +60,5 @@ class Controller extends GetxController {
   Rx<Mode> mode = Rx<Mode>(Mode.multiple);
   RxBool running = false.obs;
   RxString outputPath="".obs;
+  RxList<MultipleConfigItem> multipleConfigItems = <MultipleConfigItem>[].obs;
 }
