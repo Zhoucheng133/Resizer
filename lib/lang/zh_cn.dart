@@ -22,4 +22,7 @@ const Map<String, String> zhCN = {
   'invalidOutputSize': "无效的输出尺寸",
   'success': "成功",
   'generateSuccess': "生成成功",
+  'addOutput': "添加输出",
+  'fromJson': "从JSON",
+  'saved': "已保存",
 };
