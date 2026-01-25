@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resizer/components/add_output_dialog.dart';
 import 'package:resizer/components/config_item.dart';
+import 'package:resizer/components/multiple_item.dart';
 import 'package:resizer/utils/controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -102,9 +103,7 @@ class _ConfigMultipleState extends State<ConfigMultiple> {
           child: Obx(()=>
             ListView.builder(
               itemCount: controller.multipleConfigItems.length,
-              itemBuilder: (context, index)=>Text(
-                controller.multipleConfigItems[index].path,
-              )
+              itemBuilder: (context, index)=>MultipleItem(item: controller.multipleConfigItems[index],)
             )
           )
         ),

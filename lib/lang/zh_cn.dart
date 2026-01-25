@@ -30,5 +30,6 @@ const Map<String, String> zhCN = {
   'name': "名称",
   'noExtNeeded': "输出名称不需要后缀名",
   'extNeeded': "需要后缀名",
-  'sizeTip': "长或宽为0表示按照比例缩放"
+  'sizeTip': "长或宽为0表示按照比例缩放",
+  'delete': "删除",
 };

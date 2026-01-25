@@ -34,11 +34,21 @@ class MultipleConfigItem{
     return MultipleConfigItem(json['path'], json['width'], json['height']);
   }
 
-  Map toJson() => {
+  Map<String, dynamic> toJson() => {
     'path': path,
     'width': width,
     'height': height,
   };
+
+  @override
+  bool operator ==(Object other) =>
+      other is MultipleConfigItem &&
+          other.path == path &&
+          other.width == width &&
+          other.height == height;
+  
+  @override
+  int get hashCode => path.hashCode ^ width.hashCode ^ height.hashCode;
 }
 
 class Controller extends GetxController {
