@@ -24,21 +24,17 @@ enum Status{
 }
 
 class MultipleConfigItem{
-  String name;
   String path;
   int width;
   int height;
   Status status=Status.waiting;
-  MultipleConfigItem(this.name, this.path, this.width, this.height);
+  MultipleConfigItem(this.path, this.width, this.height);
 
-  MultipleConfigItem.fromJson(Map<String, dynamic> json)
-      : name = json['name'],
-        path = json['path'],
-        width = json['width'],
-        height = json['height'];
+  factory MultipleConfigItem.fromJson(Map<String, dynamic> json){
+    return MultipleConfigItem(json['path'], json['width'], json['height']);
+  }
 
   Map toJson() => {
-    'name': name,
     'path': path,
     'width': width,
     'height': height,

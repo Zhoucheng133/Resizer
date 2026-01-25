@@ -24,7 +24,7 @@ bool isValidPath(String path) {
 
 Future<void> showAddOutputDialog(BuildContext context) async {
 
-  MultipleConfigItem item = MultipleConfigItem("", "", 0, 0);
+  MultipleConfigItem item = MultipleConfigItem("", 0, 0);
   final pathController = TextEditingController();
   final sizeWController = TextEditingController(text: item.width.toString(),);
   final sizeHController = TextEditingController(text: item.height.toString(),);
@@ -58,9 +58,6 @@ Future<void> showAddOutputDialog(BuildContext context) async {
                     autocorrect: false,
                     enableSuggestions: false,
                     onChanged: (val){
-                      setState(() {
-                        item.name = val;
-                      });
                       setState(() {
                         item.path = val;
                       });
