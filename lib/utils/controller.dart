@@ -6,7 +6,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 enum Mode{
   single,
   multiple,
-  json
 }
 
 enum Format{
