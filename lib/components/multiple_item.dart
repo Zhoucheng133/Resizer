@@ -85,25 +85,39 @@ class _MultipleItemState extends State<MultipleItem> {
                           Text(
                             widget.item.width == 0 ? '[AUTO]' : widget.item.width.toString(),
                             style: TextStyle(
-                              fontSize: 18
+                              fontSize: 16
                             ),
                           ),
                           Padding(
                             padding: .symmetric(horizontal: 5),
                             child: FaIcon(
                               FontAwesomeIcons.xmark,
-                              size: 15,
+                              size: 14,
                             ),
                           ),
                           Text(
                             widget.item.height == 0 ? '[AUTO]' : widget.item.width.toString(),
                             style: TextStyle(
-                              fontSize: 18
+                              fontSize: 16
                             ),
                           ),
                         ],
                       ),
-                      Text(widget.item.path)
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.folder_open_rounded,
+                            size: 16,
+                          ),
+                          const SizedBox(width: 5,),
+                          Text(
+                            widget.item.path,
+                            style: TextStyle(
+                              fontSize: 13
+                            ),
+                          ),
+                        ],
+                      )
                     ],
                   )
                 ),
