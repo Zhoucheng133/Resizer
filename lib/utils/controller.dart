@@ -28,7 +28,8 @@ class Controller extends GetxController {
 
   RxString path = "".obs;
   Rx<Size> size = Size(0, 0).obs;
-  Rx<Mode> mode = Rx<Mode>(Mode.single);
+  // TODO 临时修改
+  Rx<Mode> mode = Rx<Mode>(Mode.multiple);
   RxBool running = false.obs;
   RxString outputPath="".obs;
 }
