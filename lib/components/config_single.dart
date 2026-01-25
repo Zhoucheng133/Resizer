@@ -233,6 +233,16 @@ class _ConfigSingleState extends State<ConfigSingle> {
             enableSuggestions: false,
           )
         ),
+        ConfigItem(
+          label: "", 
+          paddingSize: 0,
+          child: Text(
+            "noExtNeeded".tr,
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          )
+        ),
         Expanded(child: Container()),
         ConfigItem(
           label: "outputPath".tr, 
