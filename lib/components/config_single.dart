@@ -245,16 +245,19 @@ class _ConfigSingleState extends State<ConfigSingle> {
             children: [
               Expanded(
                 child: Obx(
-                  ()=> TextField(
-                    controller: TextEditingController(text: controller.outputPath.value),
-                    readOnly: true,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      isCollapsed: true,
-                      contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                  ()=> Tooltip(
+                    message: controller.outputPath.value,
+                    child: TextField(
+                      controller: TextEditingController(text: controller.outputPath.value),
+                      readOnly: true,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        isCollapsed: true,
+                        contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                      ),
+                      autocorrect: false,
+                      enableSuggestions: false,
                     ),
-                    autocorrect: false,
-                    enableSuggestions: false,
                   ),
                 )
               ),
