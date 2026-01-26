@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -29,6 +30,7 @@ Future<void> showAddOutputDialog(BuildContext context) async {
   final sizeWController = TextEditingController(text: item.width.toString(),);
   final sizeHController = TextEditingController(text: item.height.toString(),);
   final Controller controller=Get.find();
+  Format format=Format.png;
 
   await showDialog(
     context: context,
@@ -37,31 +39,60 @@ Future<void> showAddOutputDialog(BuildContext context) async {
         title: Text('addOutput'.tr),
         content: StatefulBuilder(
           builder: (context, setState)=>SizedBox(
-            width: 400,
+            width: 450,
             child: Column(
               mainAxisSize: .min,
               children: [
                 ConfigItem(
                   label: "path".tr, 
-                  child: TextField(
-                    controller: pathController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      isCollapsed: true,
-                      contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                      // hint: Text('relativePath/name.png'),
-                      hintText: 'relativePath/name.png',
-                      hintStyle: TextStyle(
-                        color: Theme.of(context).colorScheme.primary.withAlpha(50)
-                      )
-                    ),
-                    autocorrect: false,
-                    enableSuggestions: false,
-                    onChanged: (val){
-                      setState(() {
-                        item.path = val;
-                      });
-                    },
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: pathController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            isCollapsed: true,
+                            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                            hintText: 'relativePath/name',
+                            hintStyle: TextStyle(
+                              color: Theme.of(context).colorScheme.primary.withAlpha(50)
+                            )
+                          ),
+                          autocorrect: false,
+                          enableSuggestions: false,
+                          onChanged: (val){
+                            setState(() {
+                              item.path = val;
+                            });
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        width: 120,
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton2(
+                            menuItemStyleData: MenuItemStyleData(
+                              height: 35
+                            ),
+                            items: Format.values.map((e) {
+                              return DropdownMenuItem(
+                                value: e,
+                                child: Text(".${e.name}"),
+                                // child: Text(e.name),
+                              );
+                            }).toList(),
+                            value: format,
+                            onChanged: (Format? val){
+                              if(val == null) return;
+                              setState(() {
+                                format = val;
+                              });
+                            }
+                          )
+                        ),
+                      ),
+                    ],
                   )
                 ),
                 ConfigItem(
@@ -161,7 +192,7 @@ Future<void> showAddOutputDialog(BuildContext context) async {
           ),
           ElevatedButton(
             onPressed: (){
-              if(pathController.text.isEmpty || !isValidPath(pathController.text)){
+              if(pathController.text.isEmpty || !isValidPath("${pathController.text}.${format.name}")){
                 showOkDialog(context, "error".tr, "invalidOutputPath".tr);
                 return;
               }else if(sizeHController.text.isEmpty || sizeWController.text.isEmpty){
@@ -171,6 +202,7 @@ Future<void> showAddOutputDialog(BuildContext context) async {
                 showOkDialog(context, "error".tr, "invalidOutputSize".tr);
                 return;
               }
+              item.path = "${pathController.text}.${format.name}";
               controller.multipleConfigItems.add(item);
               controller.multipleConfigItems.refresh();
               Navigator.pop(context);
