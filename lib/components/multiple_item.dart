@@ -96,7 +96,7 @@ class _MultipleItemState extends State<MultipleItem> {
                             ),
                           ),
                           Text(
-                            widget.item.height == 0 ? '[AUTO]' : widget.item.width.toString(),
+                            widget.item.height == 0 ? '[AUTO]' : widget.item.height.toString(),
                             style: TextStyle(
                               fontSize: 16
                             ),
@@ -123,7 +123,13 @@ class _MultipleItemState extends State<MultipleItem> {
                 ),
                 Padding(
                   padding: .symmetric(horizontal: 10),
-                  child: Icon(Icons.done_rounded),
+                  child: Icon(
+                    widget.item.status==Status.done ? Icons.done_rounded : 
+                    widget.item.status==Status.waiting ? Icons.timer_outlined :
+                    widget.item.status==Status.running ? Icons.hourglass_bottom_rounded:
+                    Icons.error_outline,
+                    size: 25,
+                  ),
                 )
               ],
             ),
