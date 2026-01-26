@@ -1,10 +1,15 @@
+import 'dart:io';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:path/path.dart' as p;
 import 'package:resizer/components/add_output_dialog.dart';
 import 'package:resizer/components/config_item.dart';
+import 'package:resizer/components/dialogs.dart';
 import 'package:resizer/components/multiple_item.dart';
 import 'package:resizer/utils/controller.dart';
+import 'package:resizer/utils/handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ConfigMultiple extends StatefulWidget {
@@ -17,6 +22,54 @@ class ConfigMultiple extends StatefulWidget {
 class _ConfigMultipleState extends State<ConfigMultiple> {
 
   final Controller controller=Get.find();
+  final Handler handler=Get.find();
+
+  Size? parseSize(Size size){
+    if(size.width==0 && size.height==0){
+      return null;
+    }
+    double ratio=controller.size.value.width/controller.size.value.height;
+    if(size.width==0){
+      return Size(size.height*ratio, size.height);
+    }else if(size.height==0){
+      return Size(size.width, size.width/ratio);
+    }
+    return size;
+  }
+
+  Future<void> runHandler(BuildContext context) async {
+    controller.running.value=true;
+    for(var item in controller.multipleConfigItems){
+      if(item.status != Status.waiting) continue;
+      item.status = Status.running;
+      Size? size=parseSize(Size(item.width.toDouble(), item.height.toDouble()));
+      if(size==null){
+        continue;
+      }
+
+      final directory = Directory(p.dirname(p.join(controller.outputPath.value, item.path)));
+      if(!directory.existsSync()){
+        await directory.create(recursive: true);
+      }
+      final String rlt=await handler.convertWithPath(
+        controller.path.value, 
+        size.width.toInt(), 
+        size.height.toInt(), 
+        p.join(controller.outputPath.value, item.path), 
+      );
+      if(!rlt.contains("OK") && context.mounted){
+        await showOkDialog(context, "error".tr, rlt);
+        break;
+      }else if(rlt.contains("OK")){
+        controller.multipleConfigItems.refresh();
+        item.status = Status.done;
+      }
+    }
+    controller.running.value=false;
+    if(context.mounted){
+      await showOkDialog(context, "success".tr, "generateSuccess".tr);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +166,7 @@ class _ConfigMultipleState extends State<ConfigMultiple> {
           child: Obx(()=>
             ListView.builder(
               itemCount: controller.multipleConfigItems.length,
-              itemBuilder: (context, index)=>MultipleItem(item: controller.multipleConfigItems[index],)
+              itemBuilder: (context, index)=>Obx(()=>MultipleItem(item: controller.multipleConfigItems[index],))
             )
           )
         ),
@@ -163,11 +216,7 @@ class _ConfigMultipleState extends State<ConfigMultiple> {
           child: Obx(
             ()=> FilledButton(
               onPressed: controller.running.value ? null : () async {
-                // TODO 运行
-                // print(controller.multipleConfigItems);
-                for (var element in controller.multipleConfigItems) {
-                  print(element.toJson());
-                }
+                runHandler(context);
               }, 
               child: controller.running.value ? Center(
                 child: SizedBox(
