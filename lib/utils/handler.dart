@@ -4,7 +4,7 @@ import 'dart:ui';
 
 import 'package:ffi/ffi.dart';
 import 'package:flutter/foundation.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
 import 'package:path/path.dart' as p;
 
 typedef ResizeNative = Pointer<Utf8> Function(Pointer<Utf8> path, Int width, Int height, Pointer<Utf8> output);
@@ -34,6 +34,11 @@ class Handler extends GetxController {
 
   Future<String> convert(String path, int width, int height, String output, String outputName) async {
     final String rlt=await compute(convertHandler, [path.toNativeUtf8(), width, height, p.join(output, outputName).toNativeUtf8()]);
+    return rlt;
+  }
+
+  Future<String> convertWithPath(String path, int width, int height, String output) async {
+    final String rlt=await compute(convertHandler, [path.toNativeUtf8(), width, height, output.toNativeUtf8()]);
     return rlt;
   }
 
