@@ -13,7 +13,6 @@ enum Format{
   jpg,
   webp,
   gif,
-  svg,
 }
 
 enum Status{
