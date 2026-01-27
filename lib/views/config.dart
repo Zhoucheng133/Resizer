@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:resizer/components/config_multiple.dart';
-import 'package:resizer/components/config_single.dart';
+import 'package:resizer/config_views/config_multiple.dart';
+import 'package:resizer/config_views/config_single.dart';
 import 'package:resizer/utils/controller.dart';
 
 class Config extends StatefulWidget {

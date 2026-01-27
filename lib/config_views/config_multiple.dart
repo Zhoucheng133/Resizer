@@ -7,6 +7,7 @@ import 'package:path/path.dart' as p;
 import 'package:resizer/components/add_output_dialog.dart';
 import 'package:resizer/components/config_item.dart';
 import 'package:resizer/components/dialogs.dart';
+import 'package:resizer/components/json_dialog.dart';
 import 'package:resizer/components/multiple_item.dart';
 import 'package:resizer/utils/controller.dart';
 import 'package:resizer/utils/handler.dart';
@@ -115,7 +116,7 @@ class _ConfigMultipleState extends State<ConfigMultiple> {
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   ),
                   onPressed: (){
-                    // TODO 添加输出
+                    showJsonDialog(context);
                   }, 
                   child: Row(
                     mainAxisSize: .min,
