@@ -96,16 +96,6 @@ Future<void> showAddOutputDialog(BuildContext context) async {
                   )
                 ),
                 ConfigItem(
-                  label: "", 
-                  paddingSize: 0,
-                  child: Text(
-                    "extNeeded".tr,
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                  )
-                ),
-                ConfigItem(
                   label: "outputSize".tr, 
                   child: Row(
                     children: [
