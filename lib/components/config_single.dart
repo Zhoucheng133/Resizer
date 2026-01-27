@@ -192,55 +192,46 @@ class _ConfigSingleState extends State<ConfigSingle> {
           ),
         ),
         ConfigItem(
-          label: "format".tr, 
-          child: Align(
-            alignment: .centerLeft,
-            child: SizedBox(
-              width: 100,
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton2(
-                  menuItemStyleData: MenuItemStyleData(
-                    height: 35
-                  ),
-                  items: Format.values.map((e) {
-                    return DropdownMenuItem(
-                      value: e,
-                      child: Text(e.name),
-                    );
-                  }).toList(),
-                  value: format,
-                  onChanged: (Format? val){
-                    if(val == null) return;
-                    setState(() {
-                      format = val;
-                    });
-                  }
-                )
-              ),
-            ),
-          )
-        ),
-        ConfigItem(
           label: "outputName".tr, 
-          child: TextField(
-            controller: outputNameController,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              isCollapsed: true,
-              contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-            ),
-            autocorrect: false,
-            enableSuggestions: false,
-          )
-        ),
-        ConfigItem(
-          label: "", 
-          paddingSize: 0,
-          child: Text(
-            "noExtNeeded".tr,
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.primary,
-            ),
+          child: Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: outputNameController,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    isCollapsed: true,
+                    contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                  ),
+                  autocorrect: false,
+                  enableSuggestions: false,
+                ),
+              ),
+              SizedBox(
+                width: 120,
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton2(
+                    menuItemStyleData: MenuItemStyleData(
+                      height: 35
+                    ),
+                    items: Format.values.map((e) {
+                      return DropdownMenuItem(
+                        value: e,
+                        child: Text(".${e.name}"),
+                        // child: Text(e.name),
+                      );
+                    }).toList(),
+                    value: format,
+                    onChanged: (Format? val){
+                      if(val == null) return;
+                      setState(() {
+                        format = val;
+                      });
+                    }
+                  )
+                ),
+              ),
+            ],
           )
         ),
         Expanded(child: Container()),
