@@ -22,6 +22,32 @@ enum Status{
   error,
 }
 
+class SavedConfig{
+  String name;
+  List<MultipleConfigItem> list;
+  SavedConfig(this.name, this.list);
+
+  factory SavedConfig.fromJson(Map<String, dynamic> json){
+    if(
+      json["name"] is! String || 
+      json["list"] is! List ||
+      !(json['list'] as List).every((e) => e is Map<String, dynamic>)||
+      json["list"].length==0
+    ){
+      throw FormatException('JSON match ERR');
+    }
+
+    try {
+      return SavedConfig(
+        json['name'], 
+        json['list'].map<MultipleConfigItem>((item) => MultipleConfigItem.fromJson(item)).toList()
+      );
+    } catch (e) {
+      throw FormatException('JSON match ERR');
+    }
+  }
+}
+
 class MultipleConfigItem{
   String path;
   int width;
@@ -30,6 +56,10 @@ class MultipleConfigItem{
   MultipleConfigItem(this.path, this.width, this.height);
 
   factory MultipleConfigItem.fromJson(Map<String, dynamic> json){
+    if(json["path"] is! String || json["width"] is! int || json["height"] is! int){
+      throw FormatException('JSON match ERR');
+    }
+    
     return MultipleConfigItem(json['path'], json['width'], json['height']);
   }
 

@@ -32,4 +32,9 @@ const Map<String, String> zhCN = {
   'extNeeded': "需要后缀名",
   'sizeTip': "长或宽为0表示按照比例缩放",
   'delete': "删除",
+  'addFromJson': "从JSON添加",
+  'addJsonFile': "添加JSON文件",
+  'loadOnly': "仅加载",
+  'loadAndSave': "加载并保存",
+  'invalidJson': "无效的JSON",
 };
