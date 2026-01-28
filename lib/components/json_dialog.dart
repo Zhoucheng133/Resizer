@@ -7,31 +7,38 @@ import 'package:get/get.dart';
 import 'package:resizer/components/dialogs.dart';
 import 'package:resizer/utils/controller.dart';
 
-bool checkJson(String json){
-  final Controller controller = Get.find();
+SavedConfig? checkJson(String json){
   try{
     Map<String, dynamic> jsonData=jsonDecode(json);
     if(jsonData.isEmpty){
-      return false;
+      return null;
     }
-    controller.multipleConfigItems.value=SavedConfig.fromJson(jsonData).list;
-    return true;
+    return SavedConfig.fromJson(jsonData);
   }catch(e){
-    return false;
+    return null;
   }
 }
 
-void jsonCheckHandler(BuildContext context, String path){
-  if(checkJson(File(path).readAsStringSync())){
-    Navigator.pop(context);
+SavedConfig? jsonCheckHandler(BuildContext context, String path, bool save){
+  final Controller controller = Get.find();
+  final SavedConfig? config=checkJson(File(path).readAsStringSync());
+  if(config!=null){
+    if(save && controller.savedConfigs.indexWhere((item)=>item.name==config.name)!=-1){
+      showOkDialog(context, "error".tr, "configNameExists".tr);
+      return null;
+    }
+    controller.multipleConfigItems.value=config.list;
+    return config;
   }else{
     showOkDialog(context, "error".tr, "invalidJson".tr);
+    return null;
   }
 }
 
 Future<void> showJsonDialog(BuildContext context) async {
 
   String filePath="";
+  final Controller controller = Get.find();
 
   await showDialog(
     context: context,
@@ -80,14 +87,20 @@ Future<void> showJsonDialog(BuildContext context) async {
           ),
           TextButton(
             onPressed: (){
-              jsonCheckHandler(context, filePath);
+              final SavedConfig? config=jsonCheckHandler(context, filePath, false);
+              if(config!=null){
+                Navigator.pop(context);
+              }
             }, 
             child: Text('loadOnly'.tr)
           ),
           ElevatedButton(
             onPressed: (){
-              jsonCheckHandler(context, filePath);
-              // TODO 保存
+              final SavedConfig? config=jsonCheckHandler(context, filePath, true);
+              if(config!=null){
+                controller.addSavedConfig(config);
+                Navigator.pop(context);
+              }
             }, 
             child: Text('loadAndSave'.tr)
           )

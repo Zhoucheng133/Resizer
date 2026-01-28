@@ -37,4 +37,5 @@ const Map<String, String> zhCN = {
   'loadOnly': "仅加载",
   'loadAndSave': "加载并保存",
   'invalidJson': "无效的JSON",
+  'configNameExists': "配置名称已存在",
 };

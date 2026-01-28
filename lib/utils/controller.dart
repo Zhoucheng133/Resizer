@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:get/get.dart';
@@ -46,6 +47,11 @@ class SavedConfig{
       throw FormatException('JSON match ERR');
     }
   }
+
+  Map<String, dynamic> toJson() => {
+    'name': name,
+    'list': list.map((item) => item.toJson()).toList(),
+  };
 }
 
 class MultipleConfigItem{
@@ -87,6 +93,16 @@ class Controller extends GetxController {
   Future<void> init() async {
     prefs = await SharedPreferences.getInstance();
     outputPath.value = prefs.getString("outputPath") ?? "";
+    List<String>? savedConfigsPrefs = prefs.getStringList("savedConfigs");
+    try {
+      if(savedConfigsPrefs!=null){
+        for (var item in savedConfigsPrefs) {
+          savedConfigs.add(SavedConfig.fromJson(jsonDecode(item)));
+        }
+      }
+    } catch (_) {
+      savedConfigs.clear();
+    }
   }
 
   RxString path = "".obs;
@@ -96,4 +112,10 @@ class Controller extends GetxController {
   RxBool running = false.obs;
   RxString outputPath="".obs;
   RxList<MultipleConfigItem> multipleConfigItems = <MultipleConfigItem>[].obs;
+  RxList<SavedConfig> savedConfigs = <SavedConfig>[].obs;
+
+  void addSavedConfig(SavedConfig config){
+    savedConfigs.add(config);
+    prefs.setStringList("savedConfigs", savedConfigs.map((e) => jsonEncode(e.toJson())).toList());
+  }
 }
