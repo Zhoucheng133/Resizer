@@ -38,4 +38,8 @@ const Map<String, String> zhCN = {
   'loadAndSave': "加载并保存",
   'invalidJson': "无效的JSON",
   'configNameExists': "配置名称已存在",
+  'savedConfigs': "已保存的配置",
+  'removeConfig': "删除配置",
+  'removeConfigContent': "删除配置后，将无法恢复",
+  'close': "关闭",
 };

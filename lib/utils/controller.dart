@@ -118,4 +118,9 @@ class Controller extends GetxController {
     savedConfigs.add(config);
     prefs.setStringList("savedConfigs", savedConfigs.map((e) => jsonEncode(e.toJson())).toList());
   }
+
+  void removeSavedConfig(int index){
+    savedConfigs.removeAt(index);
+    prefs.setStringList("savedConfigs", savedConfigs.map((e) => jsonEncode(e.toJson())).toList());
+  }
 }

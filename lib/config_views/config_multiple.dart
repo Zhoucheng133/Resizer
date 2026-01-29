@@ -9,6 +9,7 @@ import 'package:resizer/components/config_item.dart';
 import 'package:resizer/components/dialogs.dart';
 import 'package:resizer/components/json_dialog.dart';
 import 'package:resizer/components/multiple_item.dart';
+import 'package:resizer/components/saved_configs_dialog.dart';
 import 'package:resizer/utils/controller.dart';
 import 'package:resizer/utils/handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,6 +25,7 @@ class _ConfigMultipleState extends State<ConfigMultiple> {
 
   final Controller controller=Get.find();
   final Handler handler=Get.find();
+  final GlobalKey savedConfigBtn = GlobalKey(); 
 
   Size? parseSize(Size size){
     if(size.width==0 && size.height==0){
@@ -128,12 +130,13 @@ class _ConfigMultipleState extends State<ConfigMultiple> {
                   )
                 ),
                 FilledButton(
+                  key: savedConfigBtn,
                   style: FilledButton.styleFrom(
                     shape: RoundedRectangleBorder(),
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   ),
                   onPressed: (){
-                    // TODO 已保存
+                    showSavedConfigsDialog(context);
                   }, 
                   child: Row(
                     mainAxisSize: .min,
@@ -155,7 +158,7 @@ class _ConfigMultipleState extends State<ConfigMultiple> {
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   ),
                   onPressed: (){
-                    controller.multipleConfigItems.clear();
+                    controller.multipleConfigItems.value=[];
                   }, 
                   child: Icon(Icons.delete_rounded)
                 ),
