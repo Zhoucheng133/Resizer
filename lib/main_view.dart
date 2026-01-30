@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:get/state_manager.dart';
+import 'package:resizer/components/about.dart';
 import 'package:resizer/utils/controller.dart';
 import 'package:resizer/views/add_view.dart';
 import 'package:resizer/views/config.dart';
@@ -94,9 +96,9 @@ class _MainViewState extends State<MainView> with WindowListener {
                 PlatformMenuItemGroup(
                   members: [
                     PlatformMenuItem(
-                      label: "关于 Resizer",
+                      label: "aboutResizer".tr,
                       onSelected: (){
-                        // TODO 显示关于
+                        showAbout(context);
                       }
                     )
                   ]
@@ -104,7 +106,7 @@ class _MainViewState extends State<MainView> with WindowListener {
                 PlatformMenuItemGroup(
                   members: [
                     PlatformMenuItem(
-                      label: "设置",
+                      label: "settings".tr,
                       shortcut: const SingleActivator(
                         LogicalKeyboardKey.comma,
                         meta: true,
@@ -130,10 +132,10 @@ class _MainViewState extends State<MainView> with WindowListener {
               ]
             ),
             PlatformMenu(
-              label: "编辑",
+              label: "edit".tr,
               menus: [
                 PlatformMenuItem(
-                  label: "拷贝",
+                  label: "copy".tr,
                   onSelected: (){
                     final focusedContext = FocusManager.instance.primaryFocus?.context;
                     if (focusedContext != null) {
@@ -142,7 +144,7 @@ class _MainViewState extends State<MainView> with WindowListener {
                   }
                 ),
                 PlatformMenuItem(
-                  label: "粘贴",
+                  label: "paste".tr,
                   onSelected: (){
                     final focusedContext = FocusManager.instance.primaryFocus?.context;
                     if (focusedContext != null) {
@@ -151,7 +153,7 @@ class _MainViewState extends State<MainView> with WindowListener {
                   },
                 ),
                 PlatformMenuItem(
-                  label: "全选",
+                  label: "selectAll".tr,
                   onSelected: (){
                     final focusedContext = FocusManager.instance.primaryFocus?.context;
                     if (focusedContext != null) {
@@ -161,8 +163,8 @@ class _MainViewState extends State<MainView> with WindowListener {
                 )
               ]
             ),
-            const PlatformMenu(
-              label: "窗口", 
+            PlatformMenu(
+              label: "window".tr, 
               menus: [
                 PlatformMenuItemGroup(
                   members: [
