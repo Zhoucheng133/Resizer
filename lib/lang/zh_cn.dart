@@ -1,5 +1,5 @@
 const Map<String, String> zhCN = {
-  'add_view_tip': "添加图片，你也可以拖拽图片到这里",
+  'add_view_tip': "添加图片, 你也可以拖拽图片到这里",
   'ok': "好的",
   'cancel': "取消",
   'addImageFailed': "添加图片失败",
@@ -33,7 +33,7 @@ const Map<String, String> zhCN = {
   'sizeTip': "长或宽为0表示按照比例缩放",
   'delete': "删除",
   'addFromJson': "从JSON添加",
-  'addJsonFile': "添加JSON文件",
+  'addJsonFile': "添加JSON文件, 你也可以拖拽JSON文件到这里",
   'loadOnly': "仅加载",
   'loadAndSave': "加载并保存",
   'invalidJson': "无效的JSON",

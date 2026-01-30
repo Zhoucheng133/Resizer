@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:desktop_drop/desktop_drop.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:path/path.dart' as p;
 import 'package:resizer/components/dialogs.dart';
 import 'package:resizer/utils/controller.dart';
 
@@ -49,34 +51,43 @@ Future<void> showJsonDialog(BuildContext context) async {
           builder: (context, setState) {
             return SizedBox(
               width: 400,
-              child: SizedBox(
-                height: 200,
-                child: Center(
-                  child: filePath.isEmpty ? Column(
-                    mainAxisSize: .min,
-                    crossAxisAlignment: .center,
-                    children: [
-                      IconButton(
-                        onPressed: () async {
-                          FilePickerResult? result = await FilePicker.platform.pickFiles(
-                            type: FileType.custom,
-                            allowedExtensions: ['json'],
-                            allowMultiple: false
-                          );
-                          if(result != null){
-                            setState(() {
-                              filePath = result.files.single.path!;
-                            });
-                          }
-                        }, 
-                        icon: Icon(Icons.add_rounded),
-                      ),
-                      const SizedBox(height: 5,),
-                      Text("addJsonFile".tr)
-                    ],
-                  ) : Text(filePath),
+              height: 200,
+              child: filePath.isEmpty ? DropTarget(
+                onDragDone: (detail) async {
+                  final path=detail.files.first.path;
+                  if(p.extension(path).toLowerCase()!='.json'){
+                    await showOkDialog(context, "error".tr, "invalidJson".tr);
+                    return;
+                  }
+                  setState(() {
+                    filePath = path;
+                  });
+                },
+                child: Column(
+                  mainAxisSize: .min,
+                  crossAxisAlignment: .center,
+                  mainAxisAlignment: .center,
+                  children: [
+                    IconButton(
+                      onPressed: () async {
+                        FilePickerResult? result = await FilePicker.platform.pickFiles(
+                          type: FileType.custom,
+                          allowedExtensions: ['json'],
+                          allowMultiple: false
+                        );
+                        if(result != null){
+                          setState(() {
+                            filePath = result.files.single.path!;
+                          });
+                        }
+                      }, 
+                      icon: Icon(Icons.add_rounded),
+                    ),
+                    const SizedBox(height: 5,),
+                    Text("addJsonFile".tr)
+                  ],
                 ),
-              ),
+              ) : Center(child: Text(filePath)),
             );
           },
         ),
