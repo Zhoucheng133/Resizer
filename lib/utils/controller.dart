@@ -107,8 +107,7 @@ class Controller extends GetxController {
 
   RxString path = "".obs;
   Rx<Size> size = Size(0, 0).obs;
-  // TODO 临时修改
-  Rx<Mode> mode = Rx<Mode>(Mode.multiple);
+  Rx<Mode> mode = Rx<Mode>(Mode.single);
   RxBool running = false.obs;
   RxString outputPath="".obs;
   RxList<MultipleConfigItem> multipleConfigItems = <MultipleConfigItem>[].obs;
