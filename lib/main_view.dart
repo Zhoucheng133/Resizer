@@ -3,8 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_instance/get_instance.dart';
-import 'package:get/state_manager.dart';
 import 'package:resizer/components/about.dart';
 import 'package:resizer/utils/controller.dart';
 import 'package:resizer/views/add_view.dart';
