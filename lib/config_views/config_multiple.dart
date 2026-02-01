@@ -100,7 +100,7 @@ class _ConfigMultipleState extends State<ConfigMultiple> {
                         bottomLeft: Radius.circular(10)
                       )
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                   ),
                   onPressed: ()=>showAddOutputDialog(context), 
                   child: Row(
@@ -115,7 +115,7 @@ class _ConfigMultipleState extends State<ConfigMultiple> {
                 FilledButton(
                   style: FilledButton.styleFrom(
                     shape: RoundedRectangleBorder(),
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                   ),
                   onPressed: (){
                     showJsonDialog(context);
@@ -133,7 +133,7 @@ class _ConfigMultipleState extends State<ConfigMultiple> {
                   key: savedConfigBtn,
                   style: FilledButton.styleFrom(
                     shape: RoundedRectangleBorder(),
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                   ),
                   onPressed: (){
                     showSavedConfigsDialog(context);
@@ -155,7 +155,7 @@ class _ConfigMultipleState extends State<ConfigMultiple> {
                         bottomRight: Radius.circular(10)
                       )
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                   ),
                   onPressed: (){
                     controller.multipleConfigItems.value=[];
