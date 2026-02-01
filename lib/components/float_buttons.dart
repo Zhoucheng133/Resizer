@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resizer/components/about.dart';
+import 'package:resizer/components/language_dialog.dart';
 import 'package:resizer/components/settings_dialog.dart';
 
 class FloatButtons extends StatefulWidget {
@@ -35,6 +36,21 @@ class _FloatButtonsState extends State<FloatButtons> {
               Icon(Icons.settings_rounded),
               SizedBox(width: 5,),
               Text("settings".tr),
+            ],
+          )
+        ),
+        FilledButton(
+          style: FilledButton.styleFrom(
+            shape: RoundedRectangleBorder(),
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+          ),
+          onPressed: ()=>showLanguageDialog(context), 
+          child: Row(
+            mainAxisSize: .min,
+            children: [
+              Icon(Icons.translate_rounded),
+              SizedBox(width: 5,),
+              Text("language".tr),
             ],
           )
         ),

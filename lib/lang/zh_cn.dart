@@ -54,4 +54,5 @@ const Map<String, String> zhCN = {
   'window': "窗口",
   'autoDark': "自动深色模式",
   'darkMode': "深色模式",
+  "language": "语言",
 };

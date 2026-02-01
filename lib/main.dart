@@ -57,13 +57,14 @@ class MainApp extends StatelessWidget {
       ()=> GetMaterialApp(
         debugShowCheckedModeBanner: false,
         translations: MainTranslations(),
-        locale: Get.deviceLocale,
+        locale: controller.lang.value.locale,
         fallbackLocale: Locale('en', 'US'),
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate
         ],
+        supportedLocales: supportedLocales.map((item)=>item.locale),
         theme: ThemeData(
             brightness: controller.darkMode.value ? Brightness.dark : Brightness.light,
             fontFamily: 'PuHui', 
