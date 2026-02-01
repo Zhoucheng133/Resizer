@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:path/path.dart' as p;
 import 'package:resizer/components/dialogs.dart';
 import 'package:resizer/utils/controller.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 SavedConfig? checkJson(String json){
   try{
@@ -53,7 +54,8 @@ Future<void> showJsonDialog(BuildContext context) async {
             const SizedBox(width: 5,),
             IconButton(
               onPressed: (){
-                // TODO add help
+                final url=Uri.parse('https://github.com/Zhoucheng133/Resizer?tab=readme-ov-file#%E8%84%9A%E6%9C%AC%E6%A0%BC%E5%BC%8F');
+                launchUrl(url);
               }, 
               icon: Icon(Icons.help_rounded)
             )
