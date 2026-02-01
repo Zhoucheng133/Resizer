@@ -46,7 +46,19 @@ Future<void> showJsonDialog(BuildContext context) async {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('addFromJson'.tr),
+        title: Row(
+          mainAxisSize: .min,
+          children: [
+            Text('addFromJson'.tr),
+            const SizedBox(width: 5,),
+            IconButton(
+              onPressed: (){
+                // TODO add help
+              }, 
+              icon: Icon(Icons.help_rounded)
+            )
+          ],
+        ),
         content: StatefulBuilder(
           builder: (context, setState) {
             return SizedBox(
