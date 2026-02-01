@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'dart:ui';
 
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -103,6 +103,9 @@ class Controller extends GetxController {
     } catch (_) {
       savedConfigs.clear();
     }
+
+    autoDark.value=prefs.getBool("autoDark") ?? true;
+    darkMode.value=prefs.getBool("darkMode") ?? false;
   }
 
   RxString path = "".obs;
@@ -112,6 +115,31 @@ class Controller extends GetxController {
   RxString outputPath="".obs;
   RxList<MultipleConfigItem> multipleConfigItems = <MultipleConfigItem>[].obs;
   RxList<SavedConfig> savedConfigs = <SavedConfig>[].obs;
+  
+  RxBool autoDark = true.obs;
+  RxBool darkMode = false.obs;
+
+  void darkModeHandler(bool dark){
+    if(autoDark.value){
+      darkMode.value=dark;
+    }
+  }
+
+  void setAutoDarkHandler(bool val, BuildContext context){
+    autoDark.value=val;
+    prefs.setBool("autoDark", autoDark.value);
+    final Brightness brightness = MediaQuery.of(context).platformBrightness;
+    if(brightness == Brightness.dark){
+      darkMode.value=true;
+    }else{
+      darkMode.value=false;
+    }
+  }
+
+  void setDarkModeHandler(bool dark){
+    darkMode.value=dark;
+    prefs.setBool("darkMode", darkMode.value);
+  }
 
   void addSavedConfig(SavedConfig config){
     savedConfigs.add(config);

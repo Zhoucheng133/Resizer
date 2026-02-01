@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:resizer/components/about.dart';
+import 'package:resizer/components/settings_dialog.dart';
 import 'package:resizer/utils/controller.dart';
 import 'package:resizer/views/add_view.dart';
 import 'package:resizer/views/config.dart';
@@ -109,9 +110,7 @@ class _MainViewState extends State<MainView> with WindowListener {
                         LogicalKeyboardKey.comma,
                         meta: true,
                       ),
-                      onSelected: (){
-                        // TODO 前往设置
-                      }
+                      onSelected: ()=>showSettingsDialog(context)
                     ),
                   ]
                 ),

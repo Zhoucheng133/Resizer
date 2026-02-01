@@ -52,4 +52,6 @@ const Map<String, String> zhCN = {
   'paste': "粘贴",
   'selectAll': "全选",
   'window': "窗口",
+  'autoDark': "自动深色模式",
+  'darkMode': "深色模式",
 };
