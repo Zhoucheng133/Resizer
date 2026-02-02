@@ -3,7 +3,6 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  clipboard
   desktop_drop
   screen_retriever_windows
   url_launcher_windows

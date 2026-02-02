@@ -5,7 +5,6 @@
 import FlutterMacOS
 import Foundation
 
-import clipboard
 import desktop_drop
 import file_picker
 import package_info_plus
@@ -15,7 +14,6 @@ import url_launcher_macos
 import window_manager
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
-  ClipboardPlugin.register(with: registry.registrar(forPlugin: "ClipboardPlugin"))
   DesktopDropPlugin.register(with: registry.registrar(forPlugin: "DesktopDropPlugin"))
   FilePickerPlugin.register(with: registry.registrar(forPlugin: "FilePickerPlugin"))
   FPPPackageInfoPlusPlugin.register(with: registry.registrar(forPlugin: "FPPPackageInfoPlusPlugin"))
