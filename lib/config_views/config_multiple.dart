@@ -81,7 +81,7 @@ class _ConfigMultipleState extends State<ConfigMultiple> {
         ConfigItem(
           label: "path".tr, 
           child: Text(
-            controller.path.value,
+            controller.path.value.split('').join('\u{200B}'),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           )
