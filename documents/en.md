@@ -12,7 +12,7 @@ The core component repository is [here](https://github.com/Zhoucheng133/Resizer-
 
 ## Screenshots
 
-<img src="../demo/cn.png" width="600px">
+<img src="../demo/en.png" width="600px">
 
 ## Script Format
 
