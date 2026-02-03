@@ -8,6 +8,11 @@ Also available in English. Click [HERE](/documents/en.md) to view the English ve
 
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
 
+<a href="https://apps.microsoft.com/detail/9n5fp6mgwwlg?referrer=appbadge&mode=direct">
+	<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
+</a>
+
+
 这是一个调整图片尺寸的工具，支持使用JSON脚本添加多个输出尺寸
 
 核心组件的仓库[在这里](https://github.com/Zhoucheng133/Resizer-Core)

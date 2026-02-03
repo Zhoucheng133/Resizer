@@ -6,6 +6,10 @@
 
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
 
+<a href="https://apps.microsoft.com/detail/9n5fp6mgwwlg?referrer=appbadge&mode=direct">
+	<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
+</a>
+
 This is a tool for resizing images, supporting multiple output sizes using JSON scripts.
 
 The core component repository is [here](https://github.com/Zhoucheng133/Resizer-Core)
