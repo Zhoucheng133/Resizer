@@ -57,6 +57,28 @@ void showSettingsDialog(BuildContext context) async {
               )
             ],
           ),
+          Row(
+            children: [
+              Text('stretch'.tr),
+              Expanded(
+                child: Align(
+                  alignment: AlignmentGeometry.centerRight,
+                  child: Obx(
+                    ()=> Transform.scale(
+                      scale: 0.8,
+                      child: Switch(
+                        value: controller.stretch.value, 
+                        splashRadius: 0,
+                        onChanged: (bool value){
+                          controller.setStretchHandler(value);
+                        }
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
         ],
       ),
       actions: [

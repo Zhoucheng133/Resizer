@@ -120,6 +120,7 @@ class Controller extends GetxController {
 
     autoDark.value=prefs.getBool("autoDark") ?? true;
     darkMode.value=prefs.getBool("darkMode") ?? false;
+    stretch.value=prefs.getBool("stretch") ?? true;
 
     int? langIndex=prefs.getInt("langIndex");
 
@@ -151,6 +152,9 @@ class Controller extends GetxController {
   RxList<MultipleConfigItem> multipleConfigItems = <MultipleConfigItem>[].obs;
   RxList<SavedConfig> savedConfigs = <SavedConfig>[].obs;
   Rx<LanguageType> lang=Rx(supportedLocales[0]);
+
+  // 强制拉伸图片
+  RxBool stretch=true.obs;
   
   RxBool autoDark = true.obs;
   RxBool darkMode = false.obs;
@@ -185,5 +189,10 @@ class Controller extends GetxController {
   void removeSavedConfig(int index){
     savedConfigs.removeAt(index);
     prefs.setStringList("savedConfigs", savedConfigs.map((e) => jsonEncode(e.toJson())).toList());
+  }
+
+  void setStretchHandler(bool val){
+    stretch.value=val;
+    prefs.setBool("stretch", stretch.value);
   }
 }

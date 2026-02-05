@@ -59,6 +59,7 @@ class _ConfigMultipleState extends State<ConfigMultiple> {
         size.width.toInt(), 
         size.height.toInt(), 
         p.join(controller.outputPath.value, item.path), 
+        controller.stretch.value,
       );
       if(!rlt.contains("OK") && context.mounted){
         await showOkDialog(context, "error".tr, rlt);

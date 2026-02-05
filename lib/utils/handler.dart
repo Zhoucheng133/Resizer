@@ -7,8 +7,8 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:path/path.dart' as p;
 
-typedef ResizeNative = Pointer<Utf8> Function(Pointer<Utf8> path, Int width, Int height, Pointer<Utf8> output);
-typedef ResizeDart = Pointer<Utf8> Function(Pointer<Utf8> path, int width, int height, Pointer<Utf8> output);
+typedef ResizeNative = Pointer<Utf8> Function(Pointer<Utf8> path, Int width, Int height, Pointer<Utf8> output, Int stretch);
+typedef ResizeDart = Pointer<Utf8> Function(Pointer<Utf8> path, int width, int height, Pointer<Utf8> output, int stretch);
 
 typedef GetSizeNative = Pointer<Utf8> Function(Pointer<Utf8> path);
 typedef GetSizeDart = Pointer<Utf8> Function(Pointer<Utf8> path);
@@ -20,7 +20,7 @@ class Handler extends GetxController {
     .lookup<NativeFunction<ResizeNative>>('Resize')
     .asFunction();
 
-    return resize(args[0], args[1], args[2], args[3]).toDartString();
+    return resize(args[0], args[1], args[2], args[3], args[4]).toDartString();
   }
 
   static String getSizeHandler(List<dynamic> args){
@@ -32,13 +32,13 @@ class Handler extends GetxController {
     return getSize(args[0]).toDartString();
   }
 
-  Future<String> convert(String path, int width, int height, String output, String outputName) async {
-    final String rlt=await compute(convertHandler, [path.toNativeUtf8(), width, height, p.join(output, outputName).toNativeUtf8()]);
+  Future<String> convert(String path, int width, int height, String output, String outputName, bool stretch) async {
+    final String rlt=await compute(convertHandler, [path.toNativeUtf8(), width, height, p.join(output, outputName).toNativeUtf8(), stretch ? 1 : 0]);
     return rlt;
   }
 
-  Future<String> convertWithPath(String path, int width, int height, String output) async {
-    final String rlt=await compute(convertHandler, [path.toNativeUtf8(), width, height, output.toNativeUtf8()]);
+  Future<String> convertWithPath(String path, int width, int height, String output, bool stretch) async {
+    final String rlt=await compute(convertHandler, [path.toNativeUtf8(), width, height, output.toNativeUtf8(), stretch ? 1 : 0]);
     return rlt;
   }
 

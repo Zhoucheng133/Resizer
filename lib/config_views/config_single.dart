@@ -283,7 +283,14 @@ class _ConfigSingleState extends State<ConfigSingle> {
               onPressed: controller.running.value ? null : () async {
                 if(await checkTask(context)){
                   controller.running.value = true;
-                  final rlt=await handler.convert(controller.path.value, int.parse(sizeWController.text), int.parse(sizeHController.text), controller.outputPath.value, "${outputNameController.text}.${format.name}");
+                  final rlt=await handler.convert(
+                    controller.path.value, 
+                    int.parse(sizeWController.text), 
+                    int.parse(sizeHController.text), 
+                    controller.outputPath.value, 
+                    "${outputNameController.text}.${format.name}",
+                    controller.stretch.value
+                  );
                   controller.running.value = false;
                   if(!rlt.contains("OK") && context.mounted){
                     await showOkDialog(context, "error".tr, rlt);

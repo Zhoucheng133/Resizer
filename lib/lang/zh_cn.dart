@@ -55,4 +55,7 @@ const Map<String, String> zhCN = {
   'autoDark': "自动深色模式",
   'darkMode': "深色模式",
   "language": "语言",
+
+  'stretch': "拉伸图片",
+  'stretchTip': "拉伸图片时，图片将拉伸至指定尺寸，不会保持原宽高比",
 };
