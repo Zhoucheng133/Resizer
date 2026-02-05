@@ -55,4 +55,7 @@ const Map<String, String> enUS = {
   'autoDark': "Auto Dark Mode",
   'darkMode': "Dark Mode",
   "language": "Language",
+
+  'stretch': "Stretch Images",
+  'stretchTip': "If enabled, the image will be stretched to the specified size and will not maintain its original aspect ratio. Disabling this switch will maintain the original aspect ratio and center the image.",
 };

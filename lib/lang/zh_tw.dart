@@ -55,4 +55,7 @@ const Map<String, String> zhTW = {
   'autoDark': "自動深色模式",
   'darkMode': "深色模式",
   "language": "語言",
+
+  'stretch': "拉伸圖片",
+  'stretchTip': "若開啟，圖片將拉伸至指定尺寸，不會保持原寬高比，關閉此開關會保持原寬高比居中圖片",
 };
