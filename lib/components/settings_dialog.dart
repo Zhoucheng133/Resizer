@@ -60,6 +60,14 @@ void showSettingsDialog(BuildContext context) async {
           Row(
             children: [
               Text('stretch'.tr),
+              const SizedBox(width: 5,),
+              Tooltip(
+                message: "stretchTip".tr,
+                child: Icon(
+                  Icons.help_rounded,
+                  size: 20,
+                ),
+              ),
               Expanded(
                 child: Align(
                   alignment: AlignmentGeometry.centerRight,
