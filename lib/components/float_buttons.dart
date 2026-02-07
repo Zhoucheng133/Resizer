@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resizer/components/about.dart';
 import 'package:resizer/components/language_dialog.dart';
+import 'package:resizer/components/scaner.dart';
 import 'package:resizer/components/settings_dialog.dart';
 
 class FloatButtons extends StatefulWidget {
@@ -27,6 +28,21 @@ class _FloatButtonsState extends State<FloatButtons> {
                 bottomLeft: Radius.circular(10)
               )
             ),
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+          ),
+          onPressed: ()=>showScanner(context), 
+          child: Row(
+            mainAxisSize: .min,
+            children: [
+              Icon(Icons.image_search_rounded),
+              SizedBox(width: 5,),
+              Text("dirScan".tr),
+            ],
+          )
+        ),
+        FilledButton(
+          style: FilledButton.styleFrom(
+            shape: RoundedRectangleBorder(),
             padding: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
           ),
           onPressed: ()=>showSettingsDialog(context), 

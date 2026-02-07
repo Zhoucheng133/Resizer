@@ -76,11 +76,22 @@ class MultipleConfigItem{
   MultipleConfigItem(this.path, this.width, this.height);
 
   factory MultipleConfigItem.fromJson(Map<String, dynamic> json){
-    if(json["path"] is! String || json["width"] is! int || json["height"] is! int){
+    if(json["path"] is! String || (json["width"] is! int && json["width"] is! String) || (json["height"] is! int && json["height"] is! String)){
       throw FormatException('JSON match ERR');
     }
-    
-    return MultipleConfigItem(json['path'], json['width'], json['height']);
+
+    try {
+      if(json["width"] is String){
+        json['width'] = int.parse(json['width']);
+      }
+      if(json["height"] is String){
+        json['height'] = int.parse(json['height']);
+      }
+      
+      return MultipleConfigItem(json['path'], json['width'], json['height']);
+    } catch (e) {
+      throw FormatException('JSON match ERR');
+    }
   }
 
   Map<String, dynamic> toJson() => {

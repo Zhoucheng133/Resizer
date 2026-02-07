@@ -13,6 +13,9 @@ typedef ResizeDart = Pointer<Utf8> Function(Pointer<Utf8> path, int width, int h
 typedef GetSizeNative = Pointer<Utf8> Function(Pointer<Utf8> path);
 typedef GetSizeDart = Pointer<Utf8> Function(Pointer<Utf8> path);
 
+typedef ReadDir = Pointer<Utf8> Function(Pointer<Utf8> path);
+typedef ReadDirDart = Pointer<Utf8> Function(Pointer<Utf8> path);
+
 class Handler extends GetxController {
   static String convertHandler(List<dynamic> args){
     final dynamicLib=DynamicLibrary.open(Platform.isMacOS ? 'core.dylib' : 'core.dll');
@@ -30,6 +33,15 @@ class Handler extends GetxController {
     .asFunction();
 
     return getSize(args[0]).toDartString();
+  }
+
+  static String readDirHandler(List<dynamic> args){
+    final dynamicLib=DynamicLibrary.open(Platform.isMacOS ? 'core.dylib' : 'core.dll');
+    final ReadDirDart readDir=dynamicLib
+    .lookup<NativeFunction<ReadDir>>('ReadDir')
+    .asFunction();
+
+    return readDir(args[0]).toDartString();
   }
 
   Future<String> convert(String path, int width, int height, String output, String outputName, bool stretch) async {
@@ -50,5 +62,10 @@ class Handler extends GetxController {
     } catch (_) {
       return null;
     }
+  }
+
+  Future<String> readDir(String path) async {
+    final String rlt=await compute(readDirHandler, [path.toNativeUtf8()]);
+    return rlt;
   }
 }

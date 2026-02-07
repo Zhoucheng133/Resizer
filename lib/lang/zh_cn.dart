@@ -40,7 +40,7 @@ const Map<String, String> zhCN = {
   'configNameExists': "配置名称已存在",
   'savedConfigs': "已保存的配置",
   'removeConfig': "删除配置",
-  'removeConfigContent': "删除配置后，将无法恢复",
+  'removeConfigContent': "删除配置后, 将无法恢复",
   'close': "关闭",
   'about': "关于",
   'projUrl': "项目地址",
@@ -57,5 +57,10 @@ const Map<String, String> zhCN = {
   "language": "语言",
 
   'stretch': "拉伸图片",
-  'stretchTip': "若开启，图片将拉伸至指定尺寸，不会保持原宽高比，关闭此开关会保持原宽高比居中图片",
+  'stretchTip': "若开启, 图片将拉伸至指定尺寸, 不会保持原宽高比, 关闭此开关会保持原宽高比居中图片",
+
+  'dirScan': "目录扫描",
+  'selectDirToScan': "添加目录扫描, 你也可以拖拽目录到这里",
+  'noImageFound': "未找到图片",
+  'tryAnotherDir': "请尝试其他目录",
 };
