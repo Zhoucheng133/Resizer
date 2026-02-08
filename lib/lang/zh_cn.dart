@@ -60,7 +60,9 @@ const Map<String, String> zhCN = {
   'stretchTip': "若开启, 图片将拉伸至指定尺寸, 不会保持原宽高比, 关闭此开关会保持原宽高比居中图片",
 
   'dirScan': "目录扫描",
-  'selectDirToScan': "添加目录扫描, 你也可以拖拽目录到这里",
+  'selectDirToScan': "添加目录扫描",
   'noImageFound': "未找到图片",
   'tryAnotherDir': "请尝试其他目录",
+  'save': "保存",
+  'nameCannotBeEmpty': "名称不能为空",
 };
