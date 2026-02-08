@@ -58,4 +58,11 @@ const Map<String, String> zhTW = {
 
   'stretch': "拉伸圖片",
   'stretchTip': "若開啟，圖片將拉伸至指定尺寸，不會保持原寬高比，關閉此開關會保持原寬高比居中圖片",
+
+  'dirScan': "目錄掃描",
+  'selectDirToScan': "添加掃描目錄",
+  'noImageFound': "未找到圖片",
+  'tryAnotherDir': "請嘗試其他目錄",
+  'save': "儲存",
+  'nameCannotBeEmpty': "名稱不能為空",
 };

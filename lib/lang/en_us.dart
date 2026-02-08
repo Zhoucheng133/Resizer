@@ -58,4 +58,11 @@ const Map<String, String> enUS = {
 
   'stretch': "Stretch Images",
   'stretchTip': "If enabled, the image will be stretched to the specified size and will not maintain its original aspect ratio. Disabling this switch will maintain the original aspect ratio and center the image.",
+
+  'dirScan': "Directory Scan",
+  'selectDirToScan': "Add Directory to Scan",
+  'noImageFound': "No images found",
+  'tryAnotherDir': "Please try another directory",
+  'save': "Save",
+  'nameCannotBeEmpty': "Name cannot be empty",
 };
