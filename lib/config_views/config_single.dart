@@ -84,109 +84,126 @@ class _ConfigSingleState extends State<ConfigSingle> {
           )
         ),
         ConfigItem(
-          label: 'lockRatio'.tr,
-          labelWidth: 90,
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Transform.scale(
-              scale: 0.8,
-              child: Switch(
-                splashRadius: 0,
-                value: lockRatio, 
-                onChanged: (val){
-                  setState(() {
-                    lockRatio = !lockRatio;
-                  });
-                  if(val && sizeWController.text.isNotEmpty){
-                    setState(() {
-                      sizeHController.text = (double.parse(sizeWController.text) / ratio).toInt().toString();
-                    });
-                  }
-                }
-              ),
-            ),
-          )
-        ),
-        ConfigItem(
           label: "outputSize".tr, 
-          child: Row(
+          child: Column(
+            crossAxisAlignment: .start,
             children: [
-              SizedBox(
-                width: 100,
-                child: TextField(
-                  controller: sizeWController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    isCollapsed: true,
-                    enabledBorder: invalidInput(sizeWController.text) ? OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.red ,
-                      ),
-                    ) : null,
-                    focusedBorder: invalidInput(sizeWController.text) ? OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.red ,
-                        width: 2
-                      ),
-                    ) : null,
-                    contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                  ),
-                  autocorrect: false,
-                  enableSuggestions: false,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
+              Transform.translate(
+                offset: Offset(-10, 0),
+                child: Row(
+                  mainAxisSize: .min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Checkbox(
+                      splashRadius: 0,
+                      value: lockRatio, 
+                      onChanged: (val){
+                        setState(() {
+                          lockRatio = !lockRatio;
+                        });
+                        if(val!=null && sizeWController.text.isNotEmpty){
+                          setState(() {
+                            sizeHController.text = (double.parse(sizeWController.text) / ratio).toInt().toString();
+                          });
+                        }
+                      }
+                    ),
+                    GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          lockRatio = !lockRatio;
+                        });
+                        if(sizeWController.text.isNotEmpty){
+                          setState(() {
+                            sizeHController.text = (double.parse(sizeWController.text) / ratio).toInt().toString();
+                          });
+                        }
+                      },
+                      child: Text('lockRatio'.tr)
+                    )
                   ],
-                  onChanged: (val){
-                    setState(() {});
-                    if(val.isEmpty) return;
-                    if(val.startsWith("0")) return;
-                    if(lockRatio){
-                      setState(() {
-                        sizeHController.text = (double.parse(val) / ratio).toInt().toString();
-                      });
-                    }
-                  },
                 ),
               ),
-              const SizedBox(width: 10),
-              FaIcon(FontAwesomeIcons.xmark),
-              const SizedBox(width: 10),
-              SizedBox(
-                width: 100,
-                child: TextField(
-                  controller: sizeHController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    isCollapsed: true,
-                    enabledBorder: invalidInput(sizeHController.text) ? OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.red ,
+              Row(
+                children: [
+                  SizedBox(
+                    width: 100,
+                    child: TextField(
+                      controller: sizeWController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        isCollapsed: true,
+                        enabledBorder: invalidInput(sizeWController.text) ? OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.red ,
+                          ),
+                        ) : null,
+                        focusedBorder: invalidInput(sizeWController.text) ? OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.red ,
+                            width: 2
+                          ),
+                        ) : null,
+                        contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
                       ),
-                    ) : null,
-                    focusedBorder: invalidInput(sizeHController.text) ? OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.red ,
-                        width: 2
-                      ),
-                    ) : null,
-                    contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 5),
+                      autocorrect: false,
+                      enableSuggestions: false,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                      ],
+                      onChanged: (val){
+                        setState(() {});
+                        if(val.isEmpty) return;
+                        if(val.startsWith("0")) return;
+                        if(lockRatio){
+                          setState(() {
+                            sizeHController.text = (double.parse(val) / ratio).toInt().toString();
+                          });
+                        }
+                      },
+                    ),
                   ),
-                  autocorrect: false,
-                  enableSuggestions: false,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                  ],
-                  onChanged: (val){
-                    setState(() {});
-                    if(val.isEmpty) return;
-                    if(val.startsWith("0")) return;
-                    if(lockRatio){
-                      setState(() {
-                        sizeWController.text = (double.parse(val) * ratio).toInt().toString();
-                      });
-                    }
-                  },
-                ),
+                  const SizedBox(width: 10),
+                  FaIcon(FontAwesomeIcons.xmark),
+                  const SizedBox(width: 10),
+                  SizedBox(
+                    width: 100,
+                    child: TextField(
+                      controller: sizeHController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        isCollapsed: true,
+                        enabledBorder: invalidInput(sizeHController.text) ? OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.red ,
+                          ),
+                        ) : null,
+                        focusedBorder: invalidInput(sizeHController.text) ? OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.red ,
+                            width: 2
+                          ),
+                        ) : null,
+                        contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 5),
+                      ),
+                      autocorrect: false,
+                      enableSuggestions: false,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                      ],
+                      onChanged: (val){
+                        setState(() {});
+                        if(val.isEmpty) return;
+                        if(val.startsWith("0")) return;
+                        if(lockRatio){
+                          setState(() {
+                            sizeWController.text = (double.parse(val) * ratio).toInt().toString();
+                          });
+                        }
+                      },
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
