@@ -21,7 +21,10 @@ Future<void> showSavedConfigsDialog(BuildContext context) async {
               return ListTile(
                 title: Text(controller.savedConfigs[index].name),
                 onTap: (){
-                  controller.multipleConfigItems.value=[...controller.savedConfigs[index].list];
+                  controller.multipleConfigItems.value=[...controller.savedConfigs[index].list.map((item){
+                    item.status=Status.waiting;
+                    return item;
+                  })];
                   Navigator.of(context).pop();
                 },
                 trailing: IconButton(
