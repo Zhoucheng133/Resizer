@@ -110,10 +110,13 @@ class _MultipleItemState extends State<MultipleItem> {
                             size: 16,
                           ),
                           const SizedBox(width: 5,),
-                          Text(
-                            widget.item.path,
-                            style: TextStyle(
-                              fontSize: 13
+                          Expanded(
+                            child: Text(
+                              widget.item.path,
+                              style: TextStyle(
+                                fontSize: 13
+                              ),
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ],
