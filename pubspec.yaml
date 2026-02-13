@@ -22,6 +22,7 @@ dependencies:
   url_launcher: ^6.3.2
   get: ^4.7.3
   dropdown_button2: ^2.3.9
+  msix: ^3.16.13
 
 dev_dependencies:
   flutter_test:
@@ -36,3 +37,15 @@ flutter:
         - asset: font/AlibabaPuHuiTi-3-Regular.ttf
   assets:
     - assets/
+
+msix_config:
+  display_name: Resizer App
+  publisher_display_name: ZhouCheng
+  identity_name: ZhouCheng.ResizerApp
+  msix_version: 0.1.0.0
+  logo_path: assets/icon.png
+  trim_logo: false
+  capabilities: internetClient
+  languages: zh-cn, en-us, zh-tw
+  publisher: # Publisher
+  store: true
