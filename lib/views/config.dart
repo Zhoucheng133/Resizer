@@ -43,6 +43,7 @@ class _ConfigState extends State<Config> {
                     onPressed: (){
                       controller.path.value="";
                       controller.size.value=Size(0,0);
+                      controller.multipleConfigItems.value=[];
                     }, 
                     icon: Icon(Icons.close_rounded)
                   )
